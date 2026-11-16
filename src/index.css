@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Fontes (hospedadas no próprio site)                                 */
+/* ------------------------------------------------------------------ */
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/cormorant-garamond-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/cormorant-garamond-italic-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/manrope-latin.woff2") format("woff2");
+}
+
+/* ------------------------------------------------------------------ */
+/* Tokens                                                              */
+/* ------------------------------------------------------------------ */
+
+@theme {
+  --color-ink: #141210;
+  --color-coal: #1e1b18;
+  --color-ivory: #f2ede4;
+  --color-stone: #b8afa2;
+  --color-gold: #c9a96e;
+
+  --font-display: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+
+  --ease-lume: cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    background-color: var(--color-ink);
+    color-scheme: dark;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 4px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Componentes de marca                                                */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  /* Rótulo pequeno em maiúsculas espaçadas */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  /* Linha fina dourada */
+  .rule {
+    height: 1px;
+    border: 0;
+    background-color: var(--color-gold);
+    opacity: 0.35;
+  }
+
+  /* Sublinhado dourado animado (só transform) */
+  .link-underline {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.55rem;
+    height: 1px;
+    background-color: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s var(--ease-lume);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after,
+  .link-underline[data-active="true"]::after {
+    transform: scaleX(1);
+  }
+
+  /* Botões: retos, sem sombra. O hover é uma camada que muda só de opacidade. */
+  .btn {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0.875rem 1.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px solid var(--color-gold);
+  }
+
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-lume);
+  }
+
+  .btn:hover::before,
+  .btn:focus-visible::before {
+    opacity: 1;
+  }
+
+  .btn-gold {
+    background-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  .btn-gold::before {
+    background-color: var(--color-ivory);
+  }
+
+  .btn-line {
+    color: var(--color-ivory);
+  }
+
+  .btn-line::before {
+    background-color: rgb(201 169 110 / 0.16);
+  }
+
+  .btn-compact {
+    min-height: 2.75rem;
+    padding: 0.5rem 1.125rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Movimento                                                           */
+/* ------------------------------------------------------------------ */
+
+/* Revelação na rolagem. Só esconde quando o JS está ativo (classe .js no <html>). */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 0.9s var(--ease-lume),
+    transform 0.9s var(--ease-lume);
+}
+
+.js [data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Título do hero: linha por linha */
+@keyframes lume-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: lume-rise 0.9s var(--ease-lume) both;
+  animation-delay: calc(var(--i, 0) * 120ms + 150ms);
+}
+
+/* Ken Burns: usado só se o vídeo não carregar */
+@keyframes lume-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.kenburns {
+  animation: lume-kenburns 20s ease-in-out infinite alternate;
+}
+
+.kenburns[data-paused="true"] {
+  animation-play-state: paused;
+}
+
+/* Indicador de rolagem */
+@keyframes lume-scroll-hint {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.scroll-hint-line {
+  animation: lume-scroll-hint 2.8s var(--ease-lume) 3;
+}
+
+/* Zoom discreto nas fotos */
+.photo-zoom {
+  transition: transform 0.9s var(--ease-lume);
+}
+
+@media (hover: hover) {
+  .photo-frame:hover .photo-zoom {
+    transform: scale(1.03);
+  }
+}
+
+/* Sem movimento: tudo estático e visível */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .photo-frame:hover .photo-zoom {
+    transform: none;
+  }
+}
