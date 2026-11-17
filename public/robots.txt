@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://lume-cozinha-de-autor.vercel.app/sitemap.xml

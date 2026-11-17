@@ -22,6 +22,8 @@ export const creatorMessage =
 /* ------------------------------------------------------------------ */
 
 export const brand = {
+  /** Endereço público do site (sem barra no final). Usado no JSON-LD. */
+  url: "https://lume-cozinha-de-autor.vercel.app",
   name: "Lume",
   tagline: "Cozinha de Autor",
   description:
