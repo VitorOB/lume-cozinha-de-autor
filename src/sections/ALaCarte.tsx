@@ -1,8 +1,9 @@
 import { Reveal } from "../components/Reveal";
 import { SectionHeading } from "../components/SectionHeading";
-import { aLaCarte } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 export function ALaCarte() {
+  const { aLaCarte } = useSite().site;
   return (
     <section
       aria-labelledby="carta-titulo"

@@ -1,9 +1,12 @@
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { Reveal } from "../components/Reveal";
 import { SectionHeading } from "../components/SectionHeading";
-import { contact, reservations, whatsappLink } from "../data/site";
+import { whatsappLink } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 export function Reservations() {
+  const { site, t } = useSite();
+  const { contact, reservations } = site;
   const whatsappUrl = whatsappLink(contact.whatsappNumber, contact.whatsappMessage);
   const reservationUrl = contact.reservationUrl.trim();
 
@@ -28,7 +31,7 @@ export function Reservations() {
             >
               <MessageCircle aria-hidden="true" size={18} strokeWidth={1.5} />
               {reservations.whatsappCta}
-              <span className="sr-only"> (abre em nova aba)</span>
+              <span className="sr-only"> {t.newTab}</span>
             </a>
 
             {/* Só aparece quando `reservationUrl` está preenchido em site.ts. */}
@@ -41,7 +44,7 @@ export function Reservations() {
               >
                 {reservations.onlineCta}
                 <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
-                <span className="sr-only"> (abre em nova aba)</span>
+                <span className="sr-only"> {t.newTab}</span>
               </a>
             )}
           </Reveal>

@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Menu } from "lucide-react";
-import { brand, navigation } from "../data/site";
+import { useSite } from "../i18n/lang";
+import { LanguageSwitch } from "./LanguageSwitch";
 import { MobileMenu } from "./MobileMenu";
 
 const MENU_ID = "menu-mobile";
 
 /** Transparente sobre o hero; ganha fundo escuro depois de rolar. */
 export function Header() {
+  const { site, t } = useSite();
+  const { brand, navigation } = site;
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -42,11 +45,11 @@ export function Header() {
           >
             <span aria-hidden="true">{brand.name.toUpperCase()}</span>
             <span className="sr-only">
-              {brand.name} — {brand.tagline}, voltar ao início
+              {brand.name} — {brand.tagline}, {t.backToTop}
             </span>
           </a>
 
-          <nav aria-label="Principal" className="hidden md:block">
+          <nav aria-label={t.mainNav} className="hidden md:block">
             <ul className="flex items-center gap-8 lg:gap-11">
               {navigation.map((item) => (
                 <li key={item.href}>
@@ -62,9 +65,10 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <a href="#reservas" className="btn btn-gold btn-compact">
-              Reservar
+            <a href="#reservas" className="btn btn-gold btn-compact hidden min-[400px]:inline-flex">
+              {t.book}
             </a>
+            <LanguageSwitch />
             <button
               ref={menuButton}
               type="button"
@@ -74,7 +78,7 @@ export function Header() {
               className="-mr-3 flex h-12 w-12 items-center justify-center text-ivory md:hidden"
             >
               <Menu aria-hidden="true" size={26} strokeWidth={1.25} />
-              <span className="sr-only">Abrir menu</span>
+              <span className="sr-only">{t.openMenu}</span>
             </button>
           </div>
         </div>

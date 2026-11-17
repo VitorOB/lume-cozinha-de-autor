@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { Pause, Play } from "lucide-react";
 import { Picture } from "../components/Picture";
-import { hero, images } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { REDUCED_MOTION, useMediaQuery } from "../hooks/useMediaQuery";
 
 const line = (index: number) => ({ "--i": index }) as CSSProperties;
 
 export function Hero() {
+  const { hero, images } = useSite().site;
   const video = useRef<HTMLVideoElement>(null);
   const reduced = useMediaQuery(REDUCED_MOTION);
 

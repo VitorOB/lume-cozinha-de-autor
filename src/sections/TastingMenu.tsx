@@ -3,13 +3,15 @@ import { scroll } from "motion";
 import { ParallaxImage } from "../components/ParallaxImage";
 import { Reveal } from "../components/Reveal";
 import { SectionHeading } from "../components/SectionHeading";
-import { tastingMenu } from "../data/site";
+import { useSite } from "../i18n/lang";
 import { REDUCED_MOTION, useMediaQuery } from "../hooks/useMediaQuery";
 
 /** Larguras alternadas das fotos, para quebrar a simetria da linha do tempo. */
 const photoWidths = ["w-full", "w-full md:w-5/6 md:ml-auto", "w-full md:w-4/6"];
 
 export function TastingMenu() {
+  const { site, t } = useSite();
+  const { tastingMenu } = site;
   const list = useRef<HTMLOListElement>(null);
   const reduced = useMediaQuery(REDUCED_MOTION);
 
@@ -75,7 +77,7 @@ export function TastingMenu() {
                     className="absolute top-2 left-0 block h-2 w-2 -translate-x-1/2 rotate-45 border border-gold bg-coal"
                   />
                   <p className="label">
-                    <span className="sr-only">Etapa </span>
+                    <span className="sr-only">{t.course}</span>
                     {String(index + 1).padStart(2, "0")}
                   </p>
                   <h3 className="mt-3 text-[clamp(2rem,4.2vw,3.25rem)] text-ivory">

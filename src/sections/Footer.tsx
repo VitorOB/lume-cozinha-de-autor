@@ -1,15 +1,10 @@
 import { DemoTag } from "../components/DemoTag";
-import {
-  brand,
-  contact,
-  creatorMessage,
-  footer,
-  navigation,
-  social,
-  whatsappLink,
-} from "../data/site";
+import { whatsappLink } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 export function Footer() {
+  const { site, t } = useSite();
+  const { brand, contact, creatorMessage, footer, navigation, social } = site;
   const creatorUrl = whatsappLink(contact.creatorWhatsapp, creatorMessage);
   const creatorName = contact.creatorName.trim();
 
@@ -26,7 +21,7 @@ export function Footer() {
             <p className="label mt-4">{brand.tagline}</p>
           </div>
 
-          <nav aria-label="Rodapé" className="md:col-span-3 md:col-start-7">
+          <nav aria-label={t.footerNav} className="md:col-span-3 md:col-start-7">
             <ul>
               {navigation.map((item) => (
                 <li key={item.href}>
@@ -67,7 +62,7 @@ export function Footer() {
               className="link-underline text-gold [&::after]:scale-x-100"
             >
               {footer.creditCta}
-              <span className="sr-only"> pelo WhatsApp (abre em nova aba)</span>
+              <span className="sr-only"> {t.viaWhatsAppNewTab}</span>
             </a>
           </p>
           <p className="md:pt-2.5 md:text-right">

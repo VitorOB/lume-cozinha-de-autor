@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 import { DemoTag } from "../components/DemoTag";
 import { Reveal } from "../components/Reveal";
 import { SectionHeading } from "../components/SectionHeading";
-import { location } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 /** Malha de linhas finas no lugar do mapa (sem embed). */
 const gridLines: CSSProperties = {
@@ -13,6 +13,7 @@ const gridLines: CSSProperties = {
 };
 
 export function Location() {
+  const { location } = useSite().site;
   return (
     <section
       aria-labelledby="local-titulo"

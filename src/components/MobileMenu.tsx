@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { CSSProperties, KeyboardEvent as ReactKeyboardEvent } from "react";
 import { X } from "lucide-react";
-import { brand, hero, navigation } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 type MobileMenuProps = {
   id: string;
@@ -15,6 +15,8 @@ type MobileMenuProps = {
  * o Tab circula dentro do painel e o Esc fecha.
  */
 export function MobileMenu({ id, open, onClose }: MobileMenuProps) {
+  const { site, t } = useSite();
+  const { brand, hero, navigation } = site;
   const panel = useRef<HTMLDivElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
 
@@ -71,7 +73,7 @@ export function MobileMenu({ id, open, onClose }: MobileMenuProps) {
       id={id}
       role="dialog"
       aria-modal="true"
-      aria-label="Menu de navegação"
+      aria-label={t.navDialog}
       inert={!open}
       onKeyDown={trapFocus}
       className={`fixed inset-0 z-50 flex flex-col overflow-y-auto bg-ink transition-[opacity,visibility] duration-500 ease-lume md:hidden ${
@@ -89,13 +91,13 @@ export function MobileMenu({ id, open, onClose }: MobileMenuProps) {
           className="-mr-3 flex h-12 w-12 items-center justify-center text-ivory"
         >
           <X aria-hidden="true" size={26} strokeWidth={1.25} />
-          <span className="sr-only">Fechar menu</span>
+          <span className="sr-only">{t.closeMenu}</span>
         </button>
       </div>
 
       <hr className="rule mx-6" />
 
-      <nav aria-label="Principal" className="flex flex-1 flex-col justify-center px-6 py-10">
+      <nav aria-label={t.mainNav} className="flex flex-1 flex-col justify-center px-6 py-10">
         <ul className="space-y-1">
           {navigation.map((item, index) => (
             <li key={item.href} className={itemClass} style={itemStyle(index)}>

@@ -1,7 +1,8 @@
 import { Reveal } from "../components/Reveal";
-import { manifesto } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 export function Manifesto() {
+  const { manifesto } = useSite().site;
   return (
     <section
       id="a-casa"

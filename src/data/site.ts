@@ -337,3 +337,28 @@ export function whatsappLink(number: string, message: string): string {
     ? `https://wa.me/${digits}?text=${text}`
     : `https://wa.me/?text=${text}`;
 }
+
+/* ------------------------------------------------------------------ */
+/* Conjunto completo, usado pela troca de idioma (src/i18n).           */
+/* A versão em inglês fica em site.en.ts, com este mesmo formato.      */
+/* ------------------------------------------------------------------ */
+
+export const sitePt = {
+  contact,
+  creatorMessage,
+  brand,
+  navigation,
+  images,
+  hero,
+  manifesto,
+  tastingMenu,
+  aLaCarte,
+  chef,
+  ambiance,
+  reservations,
+  demoTag,
+  location,
+  social,
+  footer,
+};
+export type SiteData = typeof sitePt;

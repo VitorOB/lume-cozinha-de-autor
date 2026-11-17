@@ -1,8 +1,9 @@
 import { ParallaxImage } from "../components/ParallaxImage";
 import { Reveal } from "../components/Reveal";
-import { chef } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 export function Chef() {
+  const { chef } = useSite().site;
   return (
     <section
       id="chef"

@@ -1,6 +1,7 @@
 import { Header } from "./components/Header";
 import { brand, images, location, reservations } from "./data/site";
 import { useRevealOnScroll } from "./hooks/useRevealOnScroll";
+import { useSite } from "./i18n/lang";
 import { ALaCarte } from "./sections/ALaCarte";
 import { Ambiance } from "./sections/Ambiance";
 import { Chef } from "./sections/Chef";
@@ -26,7 +27,8 @@ const jsonLd = JSON.stringify({
 }).replace(/</g, "\\u003c");
 
 export default function App() {
-  useRevealOnScroll();
+  const { lang, t } = useSite();
+  useRevealOnScroll(lang);
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function App() {
         href="#conteudo"
         className="btn btn-gold fixed top-3 left-3 z-[60] -translate-y-24 focus-visible:translate-y-0"
       >
-        Pular para o conteúdo
+        {t.skipLink}
       </a>
 
       <Header />

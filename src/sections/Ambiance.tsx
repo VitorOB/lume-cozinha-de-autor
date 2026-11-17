@@ -1,7 +1,7 @@
 import { ParallaxImage } from "../components/ParallaxImage";
 import { Reveal } from "../components/Reveal";
 import { SectionHeading } from "../components/SectionHeading";
-import { ambiance } from "../data/site";
+import { useSite } from "../i18n/lang";
 
 /**
  * Composição da galeria, na ordem das fotos em `ambiance.photos`.
@@ -33,6 +33,7 @@ const layout = [
 ];
 
 export function Ambiance() {
+  const { ambiance } = useSite().site;
   return (
     <section
       id="ambiente"
