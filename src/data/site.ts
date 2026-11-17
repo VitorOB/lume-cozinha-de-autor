@@ -10,8 +10,8 @@ export const contact = {
   whatsappMessage:
     "Olá! Gostaria de reservar uma mesa no Lume. Data: , horário: , pessoas: ",
   reservationUrl: "", // link de plataforma de reservas, se houver
-  creatorName: "",
-  creatorWhatsapp: "",
+  creatorName: "Vitor Otávio",
+  creatorWhatsapp: "5531993628211",
 };
 
 export const creatorMessage =
